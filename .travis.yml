@@ -1,0 +1,13 @@
+sudo: required
+
+services:
+  - docker
+
+branches:
+  only:
+    - master
+    - /^v?\d+\.\d+(\.\d+)?(-\S*)?$/
+
+script: 
+  - bash scripts/docker-build.sh
+  - bash scripts/docker-push.sh
