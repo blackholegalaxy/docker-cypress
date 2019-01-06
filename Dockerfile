@@ -1,8 +1,8 @@
-FROM node:8
+FROM node:10
 
 LABEL maintainer="blackholegalaxy"
 
-ARG CYPRESS_VERSION=3.1.2
+ARG CYPRESS_VERSION=3.1.3
 
 ENV DBUS_SESSION_BUS_ADDRESS=/dev/null
 ENV TERM xterm
