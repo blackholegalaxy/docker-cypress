@@ -27,7 +27,7 @@ RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add
     zip \
     nano \
   && rm -rf /var/lib/apt/lists/* \
-  && wget https://raw.githubusercontent.com/rancher/install-docker/master/17.06.2.sh && chmod +x 17.06.2.sh && ./17.06.2.sh
+  && wget https://raw.githubusercontent.com/rancher/install-docker/master/18.09.1.sh && chmod +x ./18.09.1.sh && ./18.09.1.sh
   
 RUN yarn global add cypress@$CYPRESS_VERSION
   
