@@ -26,8 +26,7 @@ RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add
     dbus-x11 \
     zip \
     nano \
-  && rm -rf /var/lib/apt/lists/* \
-  && wget https://raw.githubusercontent.com/rancher/install-docker/master/18.09.1.sh && chmod +x ./18.09.1.sh && ./18.09.1.sh
+  && rm -rf /var/lib/apt/lists/*
   
 RUN yarn global add cypress@$CYPRESS_VERSION
   
