@@ -5,9 +5,9 @@ LABEL maintainer="blackholegalaxy"
 ARG CYPRESS_VERSION=3.4.1
 
 ENV DBUS_SESSION_BUS_ADDRESS=/dev/null
-ENV TERM xterm
-ENV npm_config_loglevel warn
-ENV npm_config_unsafe_perm true
+ENV CI=1
+RUN npm config -g set user $(whoami)
+RUN echo "user: $(whoami)"
 
 RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
   && echo 'deb http://dl.google.com/linux/chrome/deb/ stable main' >> /etc/apt/sources.list \
@@ -23,12 +23,15 @@ RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add
     libxss1 \
     libasound2 \
     xvfb \
-    dbus-x11 \
     zip \
-    nano \
   && rm -rf /var/lib/apt/lists/*
   
 RUN yarn global add cypress@$CYPRESS_VERSION
+RUN cypress verify
+
+# Cypress cache and installed version
+RUN cypress cache path
+RUN cypress cache list
   
 ADD scripts/wait-on-ping.sh /etc/openvpn/wait-on-ping.sh
 
