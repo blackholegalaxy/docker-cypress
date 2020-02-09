@@ -2,7 +2,7 @@ FROM node:10
 
 LABEL maintainer="blackholegalaxy"
 
-ARG CYPRESS_VERSION=3.8.3
+ARG CYPRESS_VERSION=4.0.1
 
 ENV DBUS_SESSION_BUS_ADDRESS=/dev/null
 ENV CI=1
@@ -13,6 +13,7 @@ RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add
   && echo 'deb http://dl.google.com/linux/chrome/deb/ stable main' >> /etc/apt/sources.list \
   && apt-get -qqy update \
   && apt-get -qqy install \
+    firefox-esr \
     google-chrome-stable \
     ca-certificates \
     apt-transport-https \
