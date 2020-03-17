@@ -2,12 +2,10 @@ FROM node:12
 
 LABEL maintainer="blackholegalaxy"
 
-ARG CYPRESS_VERSION=4.2.0
-
 ENV DBUS_SESSION_BUS_ADDRESS=/dev/null
 ENV CI=1
-RUN npm config -g set user $(whoami)
-RUN echo "user: $(whoami)"
+
+RUN echo "user: $(whoami)" && npm config -g set user $(whoami)&& yarn config -g set user $(whoami)
 
 RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
   && echo 'deb http://dl.google.com/linux/chrome/deb/ stable main' >> /etc/apt/sources.list \
@@ -27,13 +25,13 @@ RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add
     zip \
   && rm -rf /var/lib/apt/lists/*
   
+ADD scripts/wait-on-ping.sh /etc/openvpn/wait-on-ping.sh
+RUN chmod +x /etc/openvpn/wait-on-ping.sh
+
+ARG CYPRESS_VERSION=4.2.0
 RUN yarn global add cypress@$CYPRESS_VERSION
 RUN cypress verify
 
 # Cypress cache and installed version
 RUN cypress cache path
 RUN cypress cache list
-  
-ADD scripts/wait-on-ping.sh /etc/openvpn/wait-on-ping.sh
-
-RUN chmod +x /etc/openvpn/wait-on-ping.sh
