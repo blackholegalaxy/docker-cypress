@@ -26,7 +26,10 @@ RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add
   && rm -rf /var/lib/apt/lists/*
   
 ADD scripts/wait-on-ping.sh /etc/openvpn/wait-on-ping.sh
+ADD scripts/wait-on-curl.sh /etc/openvpn/wait-on-curl.sh
+
 RUN chmod +x /etc/openvpn/wait-on-ping.sh
+RUN chmod +x /etc/openvpn/wait-on-curl.sh
 
 ARG CYPRESS_VERSION=4.2.0
 RUN yarn global add cypress@$CYPRESS_VERSION
