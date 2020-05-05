@@ -31,7 +31,7 @@ ADD scripts/wait-on-curl.sh /etc/openvpn/wait-on-curl.sh
 RUN chmod +x /etc/openvpn/wait-on-ping.sh
 RUN chmod +x /etc/openvpn/wait-on-curl.sh
 
-ARG CYPRESS_VERSION=4.2.0
+ARG CYPRESS_VERSION=4.5.0
 RUN yarn global add cypress@$CYPRESS_VERSION
 RUN cypress verify
 
